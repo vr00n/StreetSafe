@@ -31,43 +31,48 @@ MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, data
 	console.log("Connected to the streetsafedb database!");
 	db = database;
 
-    // Create the street_safe_data collection
-    db.createCollection("street_safe_data", function(err, res) {
+    // Remove the street safe data collection to clear it out
+    db.collection("street_safe_data").drop(function(err, delOK) {
         if (err) throw err;
-        console.log("Street_safe_data collection created!");
-    });
-
-    /*
-       Insert the data from a spreadsheet into the mongodb database
-    */
-    var xlsx = require('node-xlsx').default;
-    const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
-    // Get the first row or categories from the spreadsheet
-    var categories = workSheetsFromFile[0].data[0];
-    // Get the rest of the rows from the spreadsheet
-    var entries = workSheetsFromFile[0].data.slice(1);
-
-    // console.log(categories.length);
-    // console.log(entries);
-
-    // Insert the entries with the correct categories into database
-    //for (var i = 0; i < entries.length; i++) {
-        db.collection('street_safe_data').insertOne({
-            "hello": "world"
-            // categories[0]: entries[i][0],
-            // categories[1]: entries[i][1],
-            // categories[2]: entries[i][2],
-            // categories[3]: entries[i][3],
-            // categories[4]: entries[i][4],
-            // categories[5]: entries[i][5]
-        },
-        function(err, res) {
+        if (delOK) console.log("Collection deleted");
+        // Recreate the street_safe_data collection from scratch
+        db.createCollection("street_safe_data", function(err, res) {
             if (err) throw err;
-            console.log("1 document inserted");
+            console.log("Street_safe_data collection created!");
+            /*
+               Insert the data from a spreadsheet into the mongodb database
+            */
+            var xlsx = require('node-xlsx').default;
+            const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
+            // Get the first row or categories from the spreadsheet
+            var categories = workSheetsFromFile[0].data[0];
+            // Get the rest of the rows from the spreadsheet
+            var entries = workSheetsFromFile[0].data.slice(1);
+
+            // console.log(categories.length);
+            // console.log(entries);
+
+            // Insert the entries with the correct categories into database
+            for (var i = 0; i < entries.length; i++) {
+                var obj = {}
+                obj[categories[0]] = entries[i][0];
+                obj[categories[1]] = entries[i][1];
+                obj[categories[2]] = entries[i][2];
+                obj[categories[3]] = entries[i][3];
+                obj[categories[4]] = entries[i][4];
+                obj[categories[5]] = entries[i][5];
+                db.collection('street_safe_data').insertOne(obj, function(err, res) {
+                    if (err) throw err;
+                    console.log("1 document inserted");
+                    // Test a query on the database
+                    db.collection("street_safe_data").findOne({}, function(err, result) {
+                        if (err) throw err;
+                        console.log(result.Category);
+                    });
+                });
+            }
         });
-    //}
-
-
+    });
     startListening();
 });
 
