@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './mainApp/app.component';
-import { HomeComponent } from './homecomponent/home.component';
+import { HomeComponent } from './homeComponent/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -18,7 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
