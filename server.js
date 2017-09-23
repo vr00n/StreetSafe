@@ -42,35 +42,35 @@ MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, data
             /*
                Insert the data from a spreadsheet into the mongodb database
             */
-            var xlsx = require('node-xlsx').default;
-            const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
+            // var xlsx = require('node-xlsx').default;
+            // const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
             // Get the first row or categories from the spreadsheet
-            var categories = workSheetsFromFile[0].data[0];
+            // var categories = workSheetsFromFile[0].data[0];
             // Get the rest of the rows from the spreadsheet
-            var entries = workSheetsFromFile[0].data.slice(1);
+            // var entries = workSheetsFromFile[0].data.slice(1);
 
             // console.log(categories.length);
             // console.log(entries);
 
             // Insert the entries with the correct categories into database
-            for (var i = 0; i < entries.length; i++) {
-                var obj = {}
-                obj[categories[0]] = entries[i][0];
-                obj[categories[1]] = entries[i][1];
-                obj[categories[2]] = entries[i][2];
-                obj[categories[3]] = entries[i][3];
-                obj[categories[4]] = entries[i][4];
-                obj[categories[5]] = entries[i][5];
-                db.collection('street_safe_data').insertOne(obj, function(err, res) {
-                    if (err) throw err;
-                    console.log("1 document inserted");
-                    // Test a query on the database
-                    db.collection("street_safe_data").findOne({}, function(err, result) {
-                        if (err) throw err;
-                        console.log(result.Category);
-                    });
-                });
-            }
+            // for (var i = 0; i < entries.length; i++) {
+            //     var obj = {}
+            //     obj[categories[0]] = entries[i][0];
+            //     obj[categories[1]] = entries[i][1];
+            //     obj[categories[2]] = entries[i][2];
+            //     obj[categories[3]] = entries[i][3];
+            //     obj[categories[4]] = entries[i][4];
+            //     obj[categories[5]] = entries[i][5];
+            //     db.collection('street_safe_data').insertOne(obj, function(err, res) {
+            //         if (err) throw err;
+            //         console.log("1 document inserted");
+            //         // Test a query on the database
+            //         db.collection("street_safe_data").findOne({}, function(err, result) {
+            //             if (err) throw err;
+            //             console.log(result.Category);
+            //         });
+            //     });
+            // }
         });
     });
     startListening();
@@ -128,9 +128,9 @@ app.post('/login', function(req, res) {
     );
 });
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+// app.get('/', function (req, res) {
+//   res.send('Hello World!');
+// });
 
 app.get('/api/entry', function (req, res) {
     db.collection('entry').find(function(err, data) {
