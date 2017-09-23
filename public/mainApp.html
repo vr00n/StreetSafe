@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/main.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Roadtrip car selector</title>
+</head>
+<body>
+    <div class="container-fluid center" id="app">
+        <h1>My Awesome Roadtrip!</h1>
+        <div class="row">
+            <div class="col-xs-6" v-bind:class="{warning:!canPurchase}">
+                <h3 v-if="vehicleSelected">You have ${{money}}. Your {{vehicleSelected}} can hold {{weight}}Ibs.</h3>
+                <h4>Select What You Want To Bring in your
+                    <select name="vehichle" v-model="vehicleSelected">
+                        <option value="" disabled selected>Select Vehicle</option>
+                        <option value="JEEP XJ">JEEP XJ</option>
+                        <option value="Pickle">Pickle</option>
+                        <option value="Mini-Coupe">Mini-Coupe</option>
+                    </select>
+                </h4>
+            </div>
+            <div class="col-xs-6">
+                <h3 v-if="vehicleSelected">What's in your {{vehicleSelected}}!</h3>
+                <h4 v-for="item in itemsInV" v-text="item"></h4>
+            </div>
+        </div>
+        <div class="row">
+            <item-well 
+                v-for="item in items"
+                v-bind:item="item"
+                v-bind:yes="vehicleSelected"
+                v-on:add="addSomething(item.indexNum)"
+                v-on:remove="removeSomething(item.indexNum)"
+                v-bind:key="item.indexNum"
+                ></item-well>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+</body>
+</html>
