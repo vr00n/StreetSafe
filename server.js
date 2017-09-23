@@ -17,17 +17,39 @@ app.use(session({
     }
 }));
 
-var mongodb = require("mongodb");
-var ObjectID = require("mongodb").ObjectId;
+/*
+   Create the mongodb streetsafedb if it hasn't been created already and
+   connect to it.
+*/
+var MongoClient = require("mongodb").MongoClient;
 var db;
-mongodb.MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, database) {
+MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, database) {
 	if (err) {
 		console.log(err);
 		return;
 	}
-	console.log("Connected to Database");
+	console.log("Connected to the streetsafedb database!");
 	db = database;
-	startListening();
+
+    // Create the street_safe_data collection
+    db.createCollection("street_safe_data", function(err, res) {
+        if (err) throw err;
+        console.log("Street_safe_data collection created!");
+    });
+
+    /*
+       Insert the data from a spreadsheet into the mongodb database
+    */
+    var xlsx = require('node-xlsx').default;
+    const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
+    // Get the first row or categories from the spreadsheet
+    var categories = workSheetsFromFile[0].data[0];
+    // Get the rest of the rows from the spreadsheet
+    var entries = workSheetsFromFile[0].data.slice(1);
+
+    // TODO: Insert the entries with the correct categories into database
+
+    startListening();
 });
 
 app.post('/register', function(req, res) {
