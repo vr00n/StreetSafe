@@ -17,6 +17,10 @@ app.use(session({
     }
 }));
 
+/*
+   Create the mongodb streetsafedb if it hasn't been created already and
+   connect to it.
+*/
 var mongodb = require("mongodb");
 var ObjectID = require("mongodb").ObjectId;
 var db;
@@ -27,8 +31,28 @@ mongodb.MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(e
 	}
 	console.log("Connected to Database");
 	db = database;
-	startListening();
 });
+
+/*
+   Insert the data from a spreadsheet into the mongodb database
+*/
+var xlsx = require('node-xlsx').default;
+const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
+// Get the first row or categories from the spreadsheet
+var categories = workSheetsFromFile[0].data[0];
+// Get the rest of the rows from the spreadsheet
+var entries = workSheetsFromFile[0].data.slice(1);
+
+db.createCollection("street_safe_data", function(err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
+});
+
+
+/*
+    Start the application
+*/
+startListening();
 
 app.post('/register', function(req, res) {
     db.collection("users").findOne({
