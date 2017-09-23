@@ -48,11 +48,9 @@ MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, data
     var entries = workSheetsFromFile[0].data.slice(1);
 
     // TODO: Insert the entries with the correct categories into database
+
+    startListening();
 });
-/*
-    Start the application
-*/
-startListening();
 
 app.post('/register', function(req, res) {
     db.collection("users").findOne({
