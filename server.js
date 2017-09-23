@@ -20,7 +20,7 @@ app.use(session({
 var mongodb = require("mongodb");
 var ObjectID = require("mongodb").ObjectId;
 var db;
-mongodb.MongoClient.connect('mongodb://localhost', function(err, database) {
+mongodb.MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, database) {
 	if (err) {
 		console.log(err);
 		return;
