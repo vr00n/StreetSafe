@@ -3,4 +3,11 @@ How to load a csv in to mongoDB from StreetSafe directory: `mongoimport -d stree
 
 
 
-Chuck's test push
+## Frontend Design
+### Setting up the frontend development environment
+
+## Backend Design
+### Setting up the backend development environment
+
+
+[Live Website](http://ec2-52-38-17-98.us-west-2.compute.amazonaws.com:3000/)
