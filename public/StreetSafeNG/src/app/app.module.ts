@@ -8,6 +8,8 @@ import { AppComponent } from './mainApp/app.component';
 import { HomeComponent } from './homeComponent/home.component';
 import { EntryComponent } from './entryList/entry.component';
 
+import { EntryService } from './entryList/entry.service';
+
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -23,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [EntryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
