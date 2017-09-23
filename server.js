@@ -146,7 +146,7 @@ app.get('/api/entry', function (req, res) {
 });
 
 //serve public folder
-app.use(express.static('public'));
+app.use(express.static('public/dist'));
 
 // 404 File Not Found
 app.use(function(req, res, next) {
