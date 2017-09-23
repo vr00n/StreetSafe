@@ -107,6 +107,19 @@ app.post('/login', function(req, res) {
 //serve public folder
 app.use(express.static('public'));
 
+// 404 File Not Found
+app.use(function(req, res, next) {
+    res.status(404);
+    res.send("404 File not Found");
+});
+
+// 500 Server Error Handler
+app.use(function(err, req, res, next){
+    console.log(err);
+    res.status(500);
+    res.send("500 Internal Server Error");
+});
+
 function startListening() {
     app.listen(3000, function() {
         console.log('ServerStarted at http://localhost:3000 ⚡');
