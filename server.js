@@ -25,7 +25,7 @@ mongodb.MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(e
 		console.log(err);
 		return;
 	}
-	console.log("Connected to Database... Go road tripping!");
+	console.log("Connected to Database");
 	db = database;
 	startListening();
 });
@@ -78,44 +78,6 @@ app.post('/login', function(req, res) {
             } else {
                 res.send('Failed to login');
             }
-        }
-    );
-});
-
-app.get('/vehicle', function(req, res) {
-    db.collection("users").findOne({
-        _id: ObjectID(req.session._id)
-    }, function(err, vehicle) {
-        if (err) {
-            console.log(err);
-            res.send('error');
-            return;
-        }
-        console.log('vehicle sent');
-        console.log(vehicle);
-        res.send(vehicle);
-    });
-});
-
-app.post('/vehicle', function(req, res) {
-    console.log('the destroyed function ran!');
-    console.log(req.body);
-    db.collection("users").updateOne(
-        {
-            _id: ObjectID(req.session._id),
-        },
-        {
-            $set : {
-                _id: req.session._id,
-                vehicle: req.body
-            }
-        }, function(err, result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            res.send(result);
-            console.log('the result happened');
         }
     );
 });
