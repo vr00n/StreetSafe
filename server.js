@@ -47,7 +47,27 @@ MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, data
     // Get the rest of the rows from the spreadsheet
     var entries = workSheetsFromFile[0].data.slice(1);
 
-    // TODO: Insert the entries with the correct categories into database
+    console.log(categories.length);
+    console.log(entries);
+
+    // Insert the entries with the correct categories into database
+    for (var i = 0; i < entries.length; i++) {
+        db.collection('street_safe_data').insertOne({
+            'hello': 'what'
+
+            // categories[0]: entries[i][0],
+            // categories[1]: entries[i][1],
+            // categories[2]: entries[i][2],
+            // categories[3]: entries[i][3],
+            // categories[4]: entries[i][4],
+            // categories[5]: entries[i][5]
+        },
+        function(err, res) {
+            if (err) throw err;
+            console.log("1 document inserted");
+        });
+    }
+
 
     startListening();
 });
@@ -103,6 +123,10 @@ app.post('/login', function(req, res) {
         }
     );
 });
+
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
 
 //serve public folder
 app.use(express.static('public'));
