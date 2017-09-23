@@ -132,18 +132,18 @@ app.post('/login', function(req, res) {
 //   res.send('Hello World!');
 // });
 
-app.get('/api/entry', function (req, res) {
-    db.collection('entry').find(function(err, data) {
-        if (err) {
-            console.log(err);
-            res.send('error');
-            return;
-        }
-        if (data) {
-            res.send(data);
-        }
-    });
-});
+// app.get('/api/entry', function (req, res) {
+//     db.collection('entry').find(function(err, data) {
+//         if (err) {
+//             console.log(err);
+//             res.send('error');
+//             return;
+//         }
+//         if (data) {
+//             res.send(data);
+//         }
+//     });
+// });
 
 //serve public folder
 app.use(express.static('public/dist'));
