@@ -43,7 +43,7 @@ MongoClient.connect('mongodb://localhost:27017/streetsafedb', function(err, data
                Insert the data from a spreadsheet into the mongodb database
             */
             var xlsx = require('node-xlsx').default;
-            const workSheetsFromFile = xlsx.parse('street_safe_data.xlsx');
+            const workSheetsFromFile = xlsx.parse('street_safe_test_data.xlsx');
             // Get the first row or categories from the spreadsheet
             var categories = workSheetsFromFile[0].data[0];
             // Get the rest of the rows from the spreadsheet
@@ -147,6 +147,10 @@ app.post('/login', function(req, res) {
 // });
 
 //serve public folder
+// app.get('/*', function(req,res){
+//     res.send('public/dist');
+// });
+
 app.use(express.static('public/dist'));
 
 // 404 File Not Found
