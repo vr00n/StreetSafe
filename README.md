@@ -1,5 +1,5 @@
 # StreetSafe
-Live Website](http://ec2-52-38-17-98.us-west-2.compute.amazonaws.com:3000/)
+[Live Website](http://ec2-52-38-17-98.us-west-2.compute.amazonaws.com:3000/)
 
 ## Frontend Design
 ### Setting up the frontend development environment
