@@ -246,7 +246,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".container {\n    background-color: #818181;\n    margin: 10px auto;\n    padding: 10px;\n    text-align: center;\n}\n\nsection {\n    background-color: #e1e1e1;\n    margin: 10px auto;\n    padding: 10px;\n    width: 50%;\n}", ""]);
 
 // exports
 
@@ -259,7 +259,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/homeComponent/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- angular bootsrap accordion for displaying list -->\n<!-- <ngb-accordion #acc=\"ngbAccordion\" activeIdes=\"ngb-panel-0\">\n    <ngb-panel title=\"Shelter\">\n        <ng-template ngbPanelContent>\n            Family\n        </ng-template>\n        <ng-template ngb>\n            Individual\n        </ng-template>\n    </ngb-panel>\n    <ngb-panel title=\"Simple\">\n        <ng-template ngbPanelTitle>\n           first template\n        </ng-template>\n        <ng-template ngbPanelContent>\n            second template\n        </ng-template>\n    </ngb-panel>\n\n</ngb-accordion> -->\n<div class=\"container\">\n    <ul>\n        <li>Shelter\n            <ul>\n                <li routerLink=\"/entry\">Adult</li>\n                <li routerLink=\"/entry\">Individual</li>\n            </ul>\n        </li>\n    </ul>\n</div>\n\n\n<!-- {FilterFields: {\"Category\": \"Shelter\", \"SubCategory\", \"Adult\"},{\"Category\": \"Shelter\", \"SubCategory\", \"Individual\"},{\"Category\": \"Food\", \"SubCategory\", \"\"}} -->\n\n"
+module.exports = "<!-- angular bootsrap accordion for displaying list -->\n<!-- <ngb-accordion #acc=\"ngbAccordion\" activeIdes=\"ngb-panel-0\">\n    <ngb-panel title=\"Shelter\">\n        <ng-template ngbPanelContent>\n            Family\n        </ng-template>\n        <ng-template ngb>\n            Individual\n        </ng-template>\n    </ngb-panel>\n    <ngb-panel title=\"Simple\">\n        <ng-template ngbPanelTitle>\n           first template\n        </ng-template>\n        <ng-template ngbPanelContent>\n            second template\n        </ng-template>\n    </ngb-panel>\n\n</ngb-accordion> -->\n<div class=\"container\">\n    <section>\n        <button (click)=\"clickShelter()\">Shelter</button>\n        <div *ngIf=\"shelterClicked\">\n            <a routerLink=\"/entry\">Adult</a>\n            <a routerLink=\"/entry\">Individual</a>\n        </div>\n    </section>\n    <section>\n        <button (click)=\"clickFood()\">Food</button>\n            <div *ngIf=\"foodClicked\">\n                <a>Go to Page for food list</a>\n            </div>\n    </section>\n    <section>\n        <button (click)=\"clickTransport()\">Transportation</button>\n            <div *ngIf=\"transportClicked\">\n                <a>Got to Page for Transportation</a>\n            </div>\n    </section>\n</div>\n\n\n<!-- {FilterFields: {\"Category\": \"Shelter\", \"SubCategory\", \"Adult\"},{\"Category\": \"Shelter\", \"SubCategory\", \"Individual\"},{\"Category\": \"Food\", \"SubCategory\", \"\"}} -->\n\n"
 
 /***/ }),
 
@@ -278,7 +278,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var HomeComponent = (function () {
     function HomeComponent() {
+        this.shelterClicked = false;
+        this.foodClicked = false;
+        this.transportClicked = false;
     }
+    HomeComponent.prototype.clickShelter = function () {
+        if (!this.shelterClicked) {
+            this.shelterClicked = true;
+        }
+        else {
+            this.shelterClicked = false;
+        }
+    };
+    HomeComponent.prototype.clickFood = function () {
+        if (!this.foodClicked) {
+            this.foodClicked = true;
+        }
+        else {
+            this.foodClicked = false;
+        }
+    };
+    HomeComponent.prototype.clickTransport = function () {
+        if (!this.transportClicked) {
+            this.transportClicked = true;
+        }
+        else {
+            this.transportClicked = false;
+        }
+    };
     return HomeComponent;
 }());
 HomeComponent = __decorate([
@@ -301,7 +328,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".header {\n    text-align: center;\n    background-color: #f1c1a1;\n}\nfooter {\n    text-align: center;\n    background-color: #c9a75b;\n}", ""]);
 
 // exports
 
@@ -314,7 +341,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/mainApp/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav><p>{{title}}</p></nav>\n<router-outlet></router-outlet>\n<footer></footer>\n\n\n"
+module.exports = "<h1 routerLink=\"/home\" class=\"header\">{{title}}</h1>\n<router-outlet></router-outlet>\n<footer>&copy; StreetSafe by Code for Boulder</footer>"
 
 /***/ }),
 
