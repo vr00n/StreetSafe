@@ -19,14 +19,19 @@
 
 </ngb-accordion> -->
 <div class="container">
-    <ul>
-        <li>Shelter
-            <ul>
-                <li routerLink="/entry">Adult</li>
-                <li routerLink="/entry">Individual</li>
-            </ul>
-        </li>
-    </ul>
+    <section>
+        <button (click)="clickShelter()">Shelter</button>
+        <div *ngIf="shelterClicked">
+            <a routerLink="/entry">Adult</a>
+            <a routerLink="/entry">Individual</a>
+        </div>
+    </section>
+    <section>
+        <button>Food</button>
+    </section>
+    <section>
+        <button>Transportation</button>
+    </section>
 </div>
 
 

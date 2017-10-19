@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  // openEntry(jsonFilters: string): void{
-
-  // }
+  shelterClicked= false;
+  clickShelter() {
+    if (!this.shelterClicked) {
+    this.shelterClicked = true;
+    } else {
+      this.shelterClicked = false;
+    }
+  }
 }
