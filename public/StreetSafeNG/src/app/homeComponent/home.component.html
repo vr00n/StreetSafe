@@ -27,10 +27,16 @@
         </div>
     </section>
     <section>
-        <button>Food</button>
+        <button (click)="clickFood()">Food</button>
+            <div *ngIf="foodClicked">
+                <a>Go to Page for food list</a>
+            </div>
     </section>
     <section>
-        <button>Transportation</button>
+        <button (click)="clickTransport()">Transportation</button>
+            <div *ngIf="transportClicked">
+                <a>Got to Page for Transportation</a>
+            </div>
     </section>
 </div>
 
